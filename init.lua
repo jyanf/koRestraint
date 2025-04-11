@@ -28,7 +28,6 @@ local function protection(p)
 
 end
 
----[[
 memory.hooktramp(ADDR_UPDATE_MATCHEND, 7,
 	memory.createcallback(0, function(cs)
 		local p = getSelf()
@@ -37,4 +36,16 @@ memory.hooktramp(ADDR_UPDATE_MATCHEND, 7,
 		--if(battle.manager.frameCount==1) then print(soku.sceneId-13, p.isRight) end
 	end)
 )
+
+
+--[[accer testing
+soku.SubscribeSceneChange(function(id, scene)
+	if id~=soku.Scene.BattleSV and id~=soku.Scene.BattleCL then return end
+	return function()
+		if battle.manager.matchState == 1 and battle.manager.frameCount == 1 then
+			memory.writebytes(battle.manager.player1.ptr + 0x573 , "\x01")
+			memory.writebytes(battle.manager.player2.ptr + 0x573 , "\x01")
+		end
+	end
+end)
 --]]
