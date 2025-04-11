@@ -1,3 +1,4 @@
+-- 分支 Tstar
 local ADDR_COMM_MODE = 0x898690
 local ADDR_UPDATE_MATCHEND = 0x482908
 --local ADDR_SPELL_CAST = 0x487b60
