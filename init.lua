@@ -7,6 +7,10 @@ local function getSelf()
 	if mode==4 then return battle.manager.player1 end
 	if mode==5 then return battle.manager.player2 end
 end
+local function checkCasting(op)
+	--print(op.spellStopCounter)
+	if op.timeStop>0 then return true end
+end
 
 local function protection(p)
 --lock
@@ -15,10 +19,13 @@ local function protection(p)
 	memory.writeint(p.opponent.ptr + 0x770, 0)
 	memory.writeint(p.opponent.ptr + 0x790, 0)
 	memory.writeint(p.opponent.ptr + 0x7a8, 0)
---avoid being attacked
-	p.meleeInvulTimer = math.max(p.meleeInvulTimer, 1)
-	p.grabInvulTimer = math.max(p.grabInvulTimer, 1)
-	p.projectileInvulTimer = math.max(p.projectileInvulTimer, 1)
+--avoid being attacked?
+	if checkCasting(p.opponent) then
+		p.meleeInvulTimer = math.max(p.meleeInvulTimer, 300)
+		p.grabInvulTimer = math.max(p.grabInvulTimer, 300)
+		p.projectileInvulTimer = math.max(p.projectileInvulTimer, 300)
+	end
+
 end
 
 ---[[
@@ -27,19 +34,7 @@ memory.hooktramp(ADDR_UPDATE_MATCHEND, 7,
 		local p = getSelf()
 		if p then protection(p) end
 		
-		if(battle.manager.frameCount==1) then print(soku.sceneId-13, p.isRight) end
+		--if(battle.manager.frameCount==1) then print(soku.sceneId-13, p.isRight) end
 	end)
 )
---]]
-
---[[local test
-soku.SubscribeSceneChange(function(id, scene)
-	if id~=soku.Scene.Battle then return end
-	return function()
-		if battle.manager.matchState~=5 then return end
-		local p= battle.manager.player2
-		protection(p)
-		return -1
-	end
-end)
 --]]
