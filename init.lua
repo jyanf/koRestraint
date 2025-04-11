@@ -1,3 +1,4 @@
+-- 无法避免某些漏网之鱼
 local ADDR_COMM_MODE = 0x898690
 local ADDR_UPDATE_MATCHEND = 0x482908
 --local ADDR_SPELL_CAST = 0x487b60
