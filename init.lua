@@ -24,18 +24,21 @@ local function protection(p) -- 保护输者
 	memory.writeint(p.opponent.ptr + 0x770-4*3, 0)
 	memory.writeint(p.opponent.ptr + 0x770-4, 0)
 	memory.writeint(p.opponent.ptr + 0x770, 0) -- 吃卡指令
+	memory.writeint(p.ptr + 0x770, 0) -- 吃卡指令
 -- 预输入
 	memory.writeint(p.opponent.ptr + 0x790-4*5, 0)
 	memory.writeint(p.opponent.ptr + 0x790-4*4, 0)
 	memory.writeint(p.opponent.ptr + 0x790-4*3, 0)
 	memory.writeint(p.opponent.ptr + 0x790-4, 0) 
 	memory.writeint(p.opponent.ptr + 0x790, 0)  -- 吃卡指令
+	memory.writeint(p.ptr + 0x790, 0)  -- 吃卡指令
 	
 	memory.writeint(p.opponent.ptr + 0x7a8-4*5, 0)
 	memory.writeint(p.opponent.ptr + 0x7a8-4*4, 0)
 	memory.writeint(p.opponent.ptr + 0x7a8-4*3, 0)
 	memory.writeint(p.opponent.ptr + 0x7a8-4, 0) 
 	memory.writeint(p.opponent.ptr + 0x7a8, 0) -- 吃卡指令
+	memory.writeint(p.ptr + 0x7a8, 0) -- 吃卡指令
 -- 输者无敌
 	-- memory.writeint(p.ptr + 0x196, 0) -- Hitstop 归零
 	p.meleeInvulTimer = 512
